@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="나를 그리는 한 장의 그림 - 예술적 심리테스트">
+    <title>나를 그리는 한 장의 그림</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#2c1810">
+</head>
+<body>
+    <div class="container">
+        <!-- 인트로 섹션 -->
+        <section class="intro-section" id="introSection">
+            <div class="art-frame">
+                <div class="canvas">
+                    <h1 class="art-title">나를 그리는<br>한 장의 그림</h1>
+                    <p class="art-subtitle">나를 표현하는 예술 작품은 무엇일까?</p>
+                    <div class="paint-brush"></div>
+                </div>
+            </div>
+            <div class="intro-description">
+                <p>당신의 내면을 하나의 예술 작품으로 표현한다면<br>어떤 모습일까요?</p>
+                <p>지금 이 순간의 감정과 마음 상태를 통해<br>당신만의 특별한 작품을 완성해보세요.</p>
+            </div>
+            <button class="start-btn" id="startTest">그림 그리기 시작</button>
+        </section>
+
+        <!-- Q1: 계절 선택 -->
+        <section class="question-section hidden" id="seasonSection">
+            <div class="question-header">
+                <button class="back-btn" id="backToIntro">← 처음으로</button>
+                <div class="question-number">Q1</div>
+                <h2 class="question-text">나를 가장 닮은 계절은 언제인가요?</h2>
+            </div>
+            
+            <div class="season-gallery">
+                <div class="season-card" data-season="spring" data-value="A">
+                    <div class="season-image spring-img"></div>
+                    <div class="season-overlay">
+                        <h3>봄</h3>
+                        <p>새로움과 설렘</p>
+                    </div>
+                </div>
+                
+                <div class="season-card" data-season="summer" data-value="B">
+                    <div class="season-image summer-img"></div>
+                    <div class="season-overlay">
+                        <h3>여름</h3>
+                        <p>활기와 열정</p>
+                    </div>
+                </div>
+                
+                <div class="season-card" data-season="autumn" data-value="C">
+                    <div class="season-image autumn-img"></div>
+                    <div class="season-overlay">
+                        <h3>가을</h3>
+                        <p>성찰과 따스한 여유</p>
+                    </div>
+                </div>
+                
+                <div class="season-card" data-season="winter" data-value="D">
+                    <div class="season-image winter-img"></div>
+                    <div class="season-overlay">
+                        <h3>겨울</h3>
+                        <p>차분함과 고요</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 캘린더 전환 섹션 -->
+        <section class="calendar-transition hidden" id="calendarTransition">
+            <div class="calendar-frame">
+                <div class="calendar-header">
+                    <button class="back-btn" id="backToSeason">← Q1으로</button>
+                    <div class="calendar-month" id="selectedSeason">SPRING</div>
+                </div>
+                <div class="calendar-body">
+                    <div class="calendar-header-days">
+                        <div class="day-name">일</div>
+                        <div class="day-name">월</div>
+                        <div class="day-name">화</div>
+                        <div class="day-name">수</div>
+                        <div class="day-name">목</div>
+                        <div class="day-name">금</div>
+                        <div class="day-name">토</div>
+                    </div>
+                    <div class="calendar-grid">
+                        <div class="calendar-day empty"></div>
+                        <div class="calendar-day empty"></div>
+                        <div class="calendar-day empty"></div>
+                        <div class="calendar-day">1</div>
+                        <div class="calendar-day">2</div>
+                        <div class="calendar-day">3</div>
+                        <div class="calendar-day">4</div>
+                        
+                        <div class="calendar-day">5</div>
+                        <div class="calendar-day">6</div>
+                        <div class="calendar-day">7</div>
+                        <div class="calendar-day">8</div>
+                        <div class="calendar-day">9</div>
+                        <div class="calendar-day">10</div>
+                        <div class="calendar-day">11</div>
+                        
+                        <div class="calendar-day">12</div>
+                        <div class="calendar-day">13</div>
+                        <div class="calendar-day">14</div>
+                        <div class="calendar-day schedule-day" data-value="A">
+                            15
+                            <div class="schedule-dot nature-dot"></div>
+                        </div>
+                        <div class="calendar-day">16</div>
+                        <div class="calendar-day schedule-day" data-value="B">
+                            17
+                            <div class="schedule-dot indoor-dot"></div>
+                        </div>
+                        <div class="calendar-day">18</div>
+                        
+                        <div class="calendar-day">19</div>
+                        <div class="calendar-day schedule-day" data-value="C">
+                            20
+                            <div class="schedule-dot city-dot"></div>
+                        </div>
+                        <div class="calendar-day">21</div>
+                        <div class="calendar-day">22</div>
+                        <div class="calendar-day">23</div>
+                        <div class="calendar-day schedule-day" data-value="D">
+                            24
+                            <div class="schedule-dot night-dot"></div>
+                        </div>
+                        <div class="calendar-day">25</div>
+                        
+                        <div class="calendar-day">26</div>
+                        <div class="calendar-day">27</div>
+                        <div class="calendar-day">28</div>
+                        <div class="calendar-day">29</div>
+                        <div class="calendar-day">30</div>
+                        <div class="calendar-day empty"></div>
+                        <div class="calendar-day empty"></div>
+                    </div>
+                    <div class="calendar-schedule">
+                        <div class="schedule-title">당신이 가장 편안함과 영감을 느끼는 공간은?</div>
+                        <div class="schedule-legend">
+                            <div class="legend-item">
+                                <div class="legend-dot nature-dot"></div>
+                                <div class="legend-text">
+                                    <strong>15일: 탁 트인 광활한 자연 🌿</strong>
+                                    <span>푸른 산길, 파도 치는 바닷가, 끝없는 들판</span>
+                                </div>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-dot indoor-dot"></div>
+                                <div class="legend-text">
+                                    <strong>17일: 아늑하고 따뜻한 실내 공간 ☕</strong>
+                                    <span>햇살 드는 카페 창가, 조용한 서재, 포근한 집 거실</span>
+                                </div>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-dot city-dot"></div>
+                                <div class="legend-text">
+                                    <strong>20일: 활기찬 도시의 거리 🌆</strong>
+                                    <span>불빛 가득한 번화가, 사람들로 붐비는 시장, 음악 흐르는 축제장</span>
+                                </div>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-dot night-dot"></div>
+                                <div class="legend-text">
+                                    <strong>24일: 고요하고 신비로운 밤의 풍경 🌌</strong>
+                                    <span>별이 쏟아지는 밤하늘, 달빛 비친 호숫가, 새벽의 고요한 거리</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="schedule-instruction">캘린더에서 일정이 있는 날짜를 선택해주세요!</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Q3: 나다운 순간 선택 -->
+        <section class="question-section hidden" id="momentSection">
+            <div class="space-background" id="spaceBackground"></div>
+            <div class="question-overlay">
+                <div class="question-header">
+                    <button class="back-btn" id="backToCalendar">← Q2로</button>
+                    <div class="question-number">Q3</div>
+                    <h2 class="question-text">내가 가장 나답다고 느끼는 순간은 언제인가요?</h2>
+                </div>
+            </div>
+            <div class="moment-illustrations">
+                <div class="moment-illustration together-illustration" data-moment="together" data-value="A">
+                    <span class="moment-label">좋아하는 사람들과 웃을 때</span>
+                </div>
+                <div class="moment-illustration create-illustration" data-moment="create" data-value="B">
+                    <span class="moment-label">혼자 몰입해서 무언가를 만들 때</span>
+                </div>
+                <div class="moment-illustration adventure-illustration" data-moment="adventure" data-value="C">
+                    <span class="moment-label">새로운 곳에서 모험할 때</span>
+                </div>
+                <div class="moment-illustration reflect-illustration" data-moment="reflect" data-value="D">
+                    <span class="moment-label">조용히 나를 돌아볼 때</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Q4: 음악 장르 선택 -->
+        <section class="question-section hidden" id="musicSection">
+            <div class="question-header">
+                <button class="back-btn" id="backToMoment">← Q3으로</button>
+                <div class="question-number">Q4</div>
+                <h2 class="question-text">지금 이 순간, 당신의 마음은 어떤 음악과 닮아 있나요? 🎧</h2>
+            </div>
+            
+            <div class="music-options">
+                <div class="music-card indie-music" data-music="indie" data-value="A" data-preview="indie">
+                    <div class="music-visual">
+                        <div class="play-indicator">♪</div>
+                        <button class="play-btn" onclick="playMusicPreview(this.closest('.music-card'))">▶</button>
+                    </div>
+                    <div class="music-info">
+                        <h3>솔직한 감정을 담은 인디 밴드 음악</h3>
+                        <p>담백하지만 힘 있는 울림</p>
+                        <div class="music-sample">♫ "Holocene" - Bon Iver</div>
+                    </div>
+                </div>
+                
+                <div class="music-card jazz-music" data-music="jazz" data-value="B" data-preview="jazz">
+                    <div class="music-visual">
+                        <div class="play-indicator">♪</div>
+                        <button class="play-btn" onclick="playMusicPreview(this.closest('.music-card'))">▶</button>
+                    </div>
+                    <div class="music-info">
+                        <h3>따뜻하게 감싸는 재즈 선율</h3>
+                        <p>부드럽고 여유로운 흐름</p>
+                        <div class="music-sample">♫ "Autumn Leaves" - Jazz Standard</div>
+                    </div>
+                </div>
+                
+                <div class="music-card rock-music" data-music="rock" data-value="C" data-preview="rock">
+                    <div class="music-visual">
+                        <div class="play-indicator">♪</div>
+                        <button class="play-btn" onclick="playMusicPreview(this.closest('.music-card'))">▶</button>
+                    </div>
+                    <div class="music-info">
+                        <h3>에너지가 터지는 록 사운드</h3>
+                        <p>거칠지만 활력이 넘치는 파동</p>
+                        <div class="music-sample">♫ "Don't Stop Me Now" - Queen</div>
+                    </div>
+                </div>
+                
+                <div class="music-card electronic-music" data-music="electronic" data-value="D" data-preview="electronic">
+                    <div class="music-visual">
+                        <div class="play-indicator">♪</div>
+                        <button class="play-btn" onclick="playMusicPreview(this.closest('.music-card'))">▶</button>
+                    </div>
+                    <div class="music-info">
+                        <h3>몽환적으로 퍼지는 일렉트로닉</h3>
+                        <p>낯설지만 빠져드는 울림</p>
+                        <div class="music-sample">♫ "Strobe" - Deadmau5</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 음악 미리듣기 오디오 -->
+            <audio id="musicPreview" preload="none">
+                <source id="audioSource" src="" type="audio/mpeg">
+            </audio>
+        </section>
+
+        <!-- Q5: 가치관 선택 -->
+        <section class="question-section hidden" id="valueSection">
+            <div class="question-header">
+                <button class="back-btn" id="backToMusic">← Q4로</button>
+                <div class="question-number">Q5</div>
+                <h2 class="question-text">당신이 가장 중요하게 여기는 가치관은?</h2>
+            </div>
+            
+            <div class="value-gallery">
+                <div class="value-card relationship-value" data-value="A">
+                    <div class="value-image relationship-img"></div>
+                    <div class="value-overlay">
+                        <h3>관계와 사랑</h3>
+                        <p>따뜻한 인연 속에서 피어나는 행복</p>
+                    </div>
+                </div>
+                
+                <div class="value-card stability-value" data-value="B">
+                    <div class="value-image stability-img"></div>
+                    <div class="value-overlay">
+                        <h3>안정과 조화</h3>
+                        <p>흔들림 없는 평온하고 균형잡힌 삶</p>
+                    </div>
+                </div>
+                
+                <div class="value-card creativity-value" data-value="C">
+                    <div class="value-image creativity-img"></div>
+                    <div class="value-overlay">
+                        <h3>창의와 도전</h3>
+                        <p>끊임없이 새로운 것을 시도하는 용기</p>
+                    </div>
+                </div>
+                
+                <div class="value-card freedom-value" data-value="D">
+                    <div class="value-image freedom-img"></div>
+                    <div class="value-overlay">
+                        <h3>자유와 독립</h3>
+                        <p>나만의 길을 개척하며 살아가는 의지</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 완료 메시지 -->
+        <section class="complete-section hidden" id="completeSection">
+            <div class="result-frame">
+                <div class="result-canvas">
+                    <div class="result-image" id="resultImage"></div>
+                    <div class="result-content">
+                        <div class="complete-emoji">🎨</div>
+                        <h2 class="complete-title" id="resultSubtitle">당신만의 예술 작품</h2>
+                        <p class="complete-description">당신이 선택한 5가지 답변이 하나의 아름다운 작품으로 탄생했습니다.</p>
+                    </div>
+                </div>
+                <div class="result-actions">
+                    <button class="retry-btn" id="retryBtn">다시 그리기</button>
+                    <button class="save-btn" id="saveBtn">결과 저장하기</button>
+                    <button class="share-btn" id="shareBtn">결과 공유하기</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
