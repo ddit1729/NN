@@ -389,6 +389,12 @@ function selectValue(selectedCard) {
         valueSection.classList.add('hidden');
         completeSection.classList.remove('hidden');
         
+        // 음악 정지
+        if (musicPreview) {
+            musicPreview.pause();
+            musicPreview.currentTime = 0;
+        }
+        
         // 최종 결과 메시지 업데이트 (모든 5가지 선택)
         updateFinalResult(selectedSeason, selectedSpace, selectedMoment, selectedMusic, selectedValue);
     }, 1500);
