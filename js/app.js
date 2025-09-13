@@ -200,6 +200,33 @@ function fadeOutAudio(callback) {
     }, 30);
 }
 
+// 모든 오디오 정지 함수
+function stopAllAudio() {
+    // 메인 음악 미리보기 정지
+    if (musicPreview) {
+        musicPreview.pause();
+        musicPreview.currentTime = 0;
+        musicPreview.volume = 0;
+    }
+    
+    // 페이지의 모든 오디오 요소 정지
+    const allAudios = document.querySelectorAll('audio');
+    allAudios.forEach(audio => {
+        audio.pause();
+        audio.currentTime = 0;
+        audio.volume = 0;
+    });
+    
+    // 음악 카드 재생 상태 초기화
+    musicCards.forEach(card => {
+        card.classList.remove('playing', 'touch-active');
+        const playBtn = card.querySelector('.play-btn');
+        if (playBtn) {
+            playBtn.textContent = '▶';
+        }
+    });
+}
+
 // 뒤로가기 버튼 이벤트 리스너
 backToIntroBtn.addEventListener('click', goBackToIntro);
 backToSeasonBtn.addEventListener('click', goBackToSeason);
@@ -389,11 +416,8 @@ function selectValue(selectedCard) {
         valueSection.classList.add('hidden');
         completeSection.classList.remove('hidden');
         
-        // 음악 정지
-        if (musicPreview) {
-            musicPreview.pause();
-            musicPreview.currentTime = 0;
-        }
+        // 음악 완전 정지
+        stopAllAudio();
         
         // 최종 결과 메시지 업데이트 (모든 5가지 선택)
         updateFinalResult(selectedSeason, selectedSpace, selectedMoment, selectedMusic, selectedValue);
