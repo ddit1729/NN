@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="intro-description">
-                <p>당신의 내면을 하나의 예술 작품으로 표현한다면<br>어떤 모습일까요?</p>
+                <p>당신의 내면을 하나의 예술 작품으로<br>표현한다면 어떤 모습일까요?</p>
                 <p>지금 이 순간의 감정과 마음 상태를 통해<br>당신만의 특별한 작품을 완성해보세요.</p>
             </div>
             <button class="start-btn" id="startTest">그림 그리기 시작</button>
@@ -72,109 +72,62 @@
             </div>
         </section>
 
-        <!-- 캘린더 전환 섹션 -->
-        <section class="calendar-transition hidden" id="calendarTransition">
+        <!-- Q2: 일정 선택 -->
+        <section class="question-section hidden" id="calendarTransition">
             <div class="calendar-frame">
                 <div class="calendar-header">
                     <button class="back-btn" id="backToSeason">← Q1으로</button>
-                    <div class="calendar-month" id="selectedSeason">SPRING</div>
+                    <div class="calendar-month" id="selectedSeasonLabel">SPRING</div>
+                    <div class="question-number">Q2</div>
                 </div>
+                
                 <div class="calendar-body">
-                    <div class="calendar-header-days">
-                        <div class="day-name">일</div>
-                        <div class="day-name">월</div>
-                        <div class="day-name">화</div>
-                        <div class="day-name">수</div>
-                        <div class="day-name">목</div>
-                        <div class="day-name">금</div>
-                        <div class="day-name">토</div>
-                    </div>
-                    <div class="calendar-grid">
-                        <div class="calendar-day empty"></div>
-                        <div class="calendar-day empty"></div>
-                        <div class="calendar-day empty"></div>
-                        <div class="calendar-day">1</div>
-                        <div class="calendar-day">2</div>
-                        <div class="calendar-day">3</div>
-                        <div class="calendar-day">4</div>
-                        
-                        <div class="calendar-day">5</div>
-                        <div class="calendar-day">6</div>
-                        <div class="calendar-day">7</div>
-                        <div class="calendar-day">8</div>
-                        <div class="calendar-day">9</div>
-                        <div class="calendar-day">10</div>
-                        <div class="calendar-day">11</div>
-                        
-                        <div class="calendar-day">12</div>
-                        <div class="calendar-day">13</div>
-                        <div class="calendar-day">14</div>
-                        <div class="calendar-day schedule-day" data-value="A">
-                            15
-                            <div class="schedule-dot nature-dot"></div>
-                        </div>
-                        <div class="calendar-day">16</div>
-                        <div class="calendar-day schedule-day" data-value="B">
-                            17
-                            <div class="schedule-dot indoor-dot"></div>
-                        </div>
-                        <div class="calendar-day">18</div>
-                        
-                        <div class="calendar-day">19</div>
-                        <div class="calendar-day schedule-day" data-value="C">
-                            20
-                            <div class="schedule-dot city-dot"></div>
-                        </div>
-                        <div class="calendar-day">21</div>
-                        <div class="calendar-day">22</div>
-                        <div class="calendar-day">23</div>
-                        <div class="calendar-day schedule-day" data-value="D">
-                            24
-                            <div class="schedule-dot night-dot"></div>
-                        </div>
-                        <div class="calendar-day">25</div>
-                        
-                        <div class="calendar-day">26</div>
-                        <div class="calendar-day">27</div>
-                        <div class="calendar-day">28</div>
-                        <div class="calendar-day">29</div>
-                        <div class="calendar-day">30</div>
-                        <div class="calendar-day empty"></div>
-                        <div class="calendar-day empty"></div>
-                    </div>
-                    <div class="calendar-schedule">
-                        <div class="schedule-title">당신이 가장 편안함과 영감을 느끼는 공간은?</div>
-                        <div class="schedule-legend">
-                            <div class="legend-item">
-                                <div class="legend-dot nature-dot"></div>
-                                <div class="legend-text">
-                                    <strong>15일: 탁 트인 광활한 자연 🌿</strong>
-                                    <span>푸른 산길, 파도 치는 바닷가, 끝없는 들판</span>
-                                </div>
+                    <div class="schedule-title">당신이 가장 참석하고 싶은 일정은?</div>
+                    
+                    <div class="schedule-list">
+                        <div class="schedule-item" data-value="A">
+                            <div class="schedule-time-icon">
+                                <div class="schedule-time">15일</div>
+                                <div class="schedule-icon">🏔️</div>
                             </div>
-                            <div class="legend-item">
-                                <div class="legend-dot indoor-dot"></div>
-                                <div class="legend-text">
-                                    <strong>17일: 아늑하고 따뜻한 실내 공간 ☕</strong>
-                                    <span>햇살 드는 카페 창가, 조용한 서재, 포근한 집 거실</span>
-                                </div>
-                            </div>
-                            <div class="legend-item">
-                                <div class="legend-dot city-dot"></div>
-                                <div class="legend-text">
-                                    <strong>20일: 활기찬 도시의 거리 🌆</strong>
-                                    <span>불빛 가득한 번화가, 사람들로 붐비는 시장, 음악 흐르는 축제장</span>
-                                </div>
-                            </div>
-                            <div class="legend-item">
-                                <div class="legend-dot night-dot"></div>
-                                <div class="legend-text">
-                                    <strong>24일: 고요하고 신비로운 밤의 풍경 🌌</strong>
-                                    <span>별이 쏟아지는 밤하늘, 달빛 비친 호숫가, 새벽의 고요한 거리</span>
-                                </div>
+                            <div class="schedule-details">
+                                <h3>산 정상에서 여는<br>트레킹 모임</h3>
+                                <p>광활한 자연 속에서 함께하는<br>등산과 자연 체험</p>
                             </div>
                         </div>
-                        <div class="schedule-instruction">캘린더에서 일정이 있는 날짜를 선택해주세요!</div>
+                        
+                        <div class="schedule-item" data-value="B">
+                            <div class="schedule-time-icon">
+                                <div class="schedule-time">17일</div>
+                                <div class="schedule-icon">📚</div>
+                            </div>
+                            <div class="schedule-details">
+                                <h3>따뜻한 조명 속<br>북카페에서의 독서 모임</h3>
+                                <p>아늑한 실내 공간에서 책과<br>차를 즐기며 이야기 나누기</p>
+                            </div>
+                        </div>
+                        
+                        <div class="schedule-item" data-value="C">
+                            <div class="schedule-time-icon">
+                                <div class="schedule-time">20일</div>
+                                <div class="schedule-icon">🎉</div>
+                            </div>
+                            <div class="schedule-details">
+                                <h3>도심 한복판<br>야시장 & 거리 축제</h3>
+                                <p>활기찬 도시의 거리에서<br>음식과 공연을 즐기는 축제</p>
+                            </div>
+                        </div>
+                        
+                        <div class="schedule-item" data-value="D">
+                            <div class="schedule-time-icon">
+                                <div class="schedule-time">24일</div>
+                                <div class="schedule-icon">⭐</div>
+                            </div>
+                            <div class="schedule-details">
+                                <h3>밤하늘 아래<br>열리는 피크닉</h3>
+                                <p>고요하고 신비로운 밤 풍경<br>속에서 별을 보며 담소</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -187,7 +140,7 @@
                 <div class="question-header">
                     <button class="back-btn" id="backToCalendar">← Q2로</button>
                     <div class="question-number">Q3</div>
-                    <h2 class="question-text">내가 가장 나답다고 느끼는 순간은 언제인가요?</h2>
+                    <h2 class="question-text">내가 가장 나답다고 느끼는<br>순간은 언제인가요?</h2>
                 </div>
             </div>
             <div class="moment-illustrations">
@@ -221,7 +174,7 @@
                         <button class="play-btn" onclick="playMusicPreview(this.closest('.music-card'))">▶</button>
                     </div>
                     <div class="music-info">
-                        <h3>솔직한 감정을 담은 인디 밴드 음악</h3>
+                        <h3>솔직한 감정을 담은<br>인디 밴드 음악</h3>
                         <p>담백하지만 힘 있는 울림</p>
                         <div class="music-sample">♫ "Holocene" - Bon Iver</div>
                     </div>
@@ -257,7 +210,7 @@
                         <button class="play-btn" onclick="playMusicPreview(this.closest('.music-card'))">▶</button>
                     </div>
                     <div class="music-info">
-                        <h3>몽환적으로 퍼지는 일렉트로닉</h3>
+                        <h3>몽환적으로 퍼지는<br>일렉트로닉</h3>
                         <p>낯설지만 빠져드는 울림</p>
                         <div class="music-sample">♫ "Strobe" - Deadmau5</div>
                     </div>
@@ -283,7 +236,7 @@
                     <div class="value-image relationship-img"></div>
                     <div class="value-overlay">
                         <h3>관계와 사랑</h3>
-                        <p>따뜻한 인연 속에서 피어나는 행복</p>
+                        <p>따뜻한 인연 속에서<br>피어나는 행복</p>
                     </div>
                 </div>
                 

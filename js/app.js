@@ -11,7 +11,7 @@ const completeSection = document.getElementById('completeSection');
 
 const startBtn = document.getElementById('startTest');
 const seasonCards = document.querySelectorAll('.season-card');
-const scheduleDays = document.querySelectorAll('.schedule-day');
+const scheduleCards = document.querySelectorAll('.schedule-item');
 const momentCards = document.querySelectorAll('.moment-illustration');
 const musicCards = document.querySelectorAll('.music-card');
 const valueCards = document.querySelectorAll('.value-card');
@@ -46,9 +46,9 @@ seasonCards.forEach(card => {
     card.addEventListener('click', () => selectSeason(card));
 });
 
-// 캘린더 일정 날짜 이벤트 리스너
-scheduleDays.forEach(day => {
-    day.addEventListener('click', () => selectSpace(day));
+// 일정 카드 이벤트 리스너
+scheduleCards.forEach(card => {
+    card.addEventListener('click', () => selectSpace(card));
 });
 
 // 순간 카드 이벤트 리스너
@@ -58,7 +58,25 @@ momentCards.forEach(card => {
 
 // 음악 카드 이벤트 리스너
 musicCards.forEach(card => {
-    card.addEventListener('click', () => selectMusic(card));
+    card.addEventListener('click', (e) => {
+        if (isMobileDevice()) {
+            // 모바일에서는 첫 클릭시 음악 재생, 두 번째 클릭시 선택
+            if (!card.classList.contains('music-playing')) {
+                e.preventDefault();
+                window.playMusicPreview(card);
+                card.classList.add('music-playing');
+                // 3초 후 자동으로 선택 가능하도록
+                setTimeout(() => {
+                    card.classList.add('ready-to-select');
+                }, 3000);
+            } else if (card.classList.contains('ready-to-select')) {
+                selectMusic(card);
+            }
+        } else {
+            // 데스크톱에서는 바로 선택
+            selectMusic(card);
+        }
+    });
     
     // 데스크톱에서는 호버로 자동 재생
     card.addEventListener('mouseenter', () => {
@@ -70,11 +88,6 @@ musicCards.forEach(card => {
         if (!isMobileDevice()) {
             stopMusicPreview();
         }
-    });
-    
-    // 모바일에서는 터치 시 재생 버튼 표시
-    card.addEventListener('touchstart', () => {
-        card.classList.add('touch-active');
     });
 });
 
@@ -238,7 +251,7 @@ function selectSeason(selectedCard) {
     }, 1500);
 }
 
-// 캘린더 계절 업데이트
+// 캘린더 계절 업데이트  
 function updateCalendarSeason(season) {
     const seasonNames = {
         'spring': 'SPRING',
@@ -247,24 +260,41 @@ function updateCalendarSeason(season) {
         'winter': 'WINTER'
     };
     
-    if (selectedSeasonElement) {
-        selectedSeasonElement.textContent = seasonNames[season] || 'SPRING';
+    const seasonMonths = {
+        'spring': ['3월 15일', '3월 17일', '3월 20일', '3월 24일'],
+        'summer': ['6월 15일', '6월 17일', '6월 20일', '6월 24일'],
+        'autumn': ['9월 15일', '9월 17일', '9월 20일', '9월 24일'],
+        'winter': ['12월 15일', '12월 17일', '12월 20일', '12월 24일']
+    };
+    
+    // 상단 계절 레이블 업데이트
+    const selectedSeasonLabel = document.getElementById('selectedSeasonLabel');
+    if (selectedSeasonLabel) {
+        selectedSeasonLabel.textContent = seasonNames[season] || 'SPRING';
     }
+    
+    // 각 일정 아이템의 시간 업데이트
+    const scheduleTimes = document.querySelectorAll('.schedule-time');
+    const times = ['15일', '17일', '20일', '24일']; // 날짜는 고정
+    
+    scheduleTimes.forEach((timeElement, index) => {
+        if (times[index]) {
+            timeElement.textContent = times[index];
+        }
+    });
 }
 
 // 공간 선택
-function selectSpace(selectedDay) {
-    const space = selectedDay.dataset.value;
+function selectSpace(selectedCard) {
+    const space = selectedCard.dataset.value;
     selectedSpace = space;
     
     // 선택 효과
-    scheduleDays.forEach(day => {
-        if (day === selectedDay) {
-            day.style.transform = 'scale(1.1)';
-            day.style.backgroundColor = '#8b4513';
-            day.style.color = '#fff';
+    scheduleCards.forEach(card => {
+        if (card === selectedCard) {
+            card.classList.add('selected');
         } else {
-            day.style.opacity = '0.3';
+            card.style.opacity = '0.3';
         }
     });
     
@@ -692,12 +722,11 @@ function goBackToIntro() {
     // 선택 상태 초기화
     selectedSeason = '';
     seasonCards.forEach(card => {
-        card.style.opacity = '';
-        card.style.transform = '';
-        card.style.zIndex = '';
-        card.style.boxShadow = '';
-        card.style.transition = '';
+        card.classList.remove('selected');
+        card.style.cssText = ''; // 모든 인라인 스타일 제거
     });
+    
+    // 인트로는 이미 깔끔한 상태이므로 추가 애니메이션 필요 없음
 }
 
 function goBackToSeason() {
@@ -707,12 +736,29 @@ function goBackToSeason() {
     
     // 캘린더 선택 상태 초기화
     selectedSpace = '';
-    scheduleDays.forEach(day => {
-        day.style.opacity = '';
-        day.style.transform = '';
-        day.style.backgroundColor = '';
-        day.style.color = '';
+    scheduleCards.forEach(card => {
+        card.classList.remove('selected');
+        card.style.cssText = ''; // 모든 인라인 스타일 제거
     });
+    
+    // 계절 카드도 완전 초기화하고 다시 애니메이션
+    seasonCards.forEach(card => {
+        card.classList.remove('selected');
+        card.style.cssText = ''; // 모든 인라인 스타일 제거
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+    });
+    
+    // 계절 카드 다시 애니메이션
+    setTimeout(() => {
+        seasonCards.forEach((card, index) => {
+            setTimeout(() => {
+                card.style.transition = 'all 0.6s ease';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, index * 100);
+        });
+    }, 100);
 }
 
 function goBackToCalendar() {
@@ -723,16 +769,33 @@ function goBackToCalendar() {
     // 순간 선택 상태 초기화
     selectedMoment = '';
     momentCards.forEach(card => {
-        card.style.opacity = '';
-        card.style.transform = '';
-        card.style.backgroundColor = '';
-        card.style.boxShadow = '';
+        card.classList.remove('selected');
+        card.style.cssText = ''; // 모든 인라인 스타일 제거
     });
     
     // 배경 초기화
     if (spaceBackground) {
         spaceBackground.className = 'space-background';
     }
+    
+    // 일정 카드도 완전 초기화하고 다시 애니메이션
+    scheduleCards.forEach(card => {
+        card.classList.remove('selected');
+        card.style.cssText = '';
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+    });
+    
+    // 일정 카드 다시 애니메이션
+    setTimeout(() => {
+        scheduleCards.forEach((card, index) => {
+            setTimeout(() => {
+                card.style.transition = 'all 0.4s ease';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, index * 80);
+        });
+    }, 100);
 }
 
 function goBackToMoment() {
@@ -743,11 +806,28 @@ function goBackToMoment() {
     // 음악 선택 상태 초기화
     selectedMusic = '';
     musicCards.forEach(card => {
-        card.style.opacity = '';
-        card.style.transform = '';
-        card.style.borderColor = '';
-        card.style.boxShadow = '';
+        card.classList.remove('selected');
+        card.style.cssText = ''; // 모든 인라인 스타일 제거
     });
+    
+    // 순간 카드도 완전 초기화하고 다시 애니메이션
+    momentCards.forEach(card => {
+        card.classList.remove('selected');
+        card.style.cssText = '';
+        card.style.opacity = '0';
+        card.style.transform = 'scale(0.8)';
+    });
+    
+    // 순간 카드 다시 애니메이션
+    setTimeout(() => {
+        momentCards.forEach((card, index) => {
+            setTimeout(() => {
+                card.style.transition = 'all 0.5s ease';
+                card.style.opacity = '1';
+                card.style.transform = 'scale(1)';
+            }, index * 120);
+        });
+    }, 150);
 }
 
 function goBackToMusic() {
@@ -758,11 +838,28 @@ function goBackToMusic() {
     // 가치관 선택 상태 초기화
     selectedValue = '';
     valueCards.forEach(card => {
-        card.style.opacity = '';
-        card.style.transform = '';
-        card.style.borderColor = '';
-        card.style.boxShadow = '';
+        card.classList.remove('selected');
+        card.style.cssText = ''; // 모든 인라인 스타일 제거
     });
+    
+    // 음악 카드도 완전 초기화하고 다시 애니메이션
+    musicCards.forEach(card => {
+        card.classList.remove('selected', 'music-playing', 'ready-to-select');
+        card.style.cssText = '';
+        card.style.opacity = '0';
+        card.style.transform = 'translateX(-20px)';
+    });
+    
+    // 음악 카드 다시 애니메이션
+    setTimeout(() => {
+        musicCards.forEach((card, index) => {
+            setTimeout(() => {
+                card.style.transition = 'all 0.5s ease';
+                card.style.opacity = '1';
+                card.style.transform = 'translateX(0)';
+            }, index * 100);
+        });
+    }, 100);
 }
 
 // 결과 저장하기 (이미지 다운로드)
