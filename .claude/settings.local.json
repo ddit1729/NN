@@ -5,7 +5,8 @@
       "WebFetch(domain:www.ikea.com)",
       "Bash(python:*)",
       "Bash(ipconfig)",
-      "Bash(findstr:*)"
+      "Bash(findstr:*)",
+      "Bash(dir C:UserscindyDesktopswnnimages)"
     ],
     "deny": [],
     "ask": []
