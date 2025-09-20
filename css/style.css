@@ -283,11 +283,24 @@ body {
     cursor: pointer;
     transition: all 0.4s ease;
     box-shadow: var(--shadow-light);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.season-card:hover {
+.season-card:hover, .season-card:active {
     transform: translateY(-10px) scale(1.02);
     box-shadow: var(--shadow-soft);
+}
+
+@media (max-width: 768px) {
+    .season-card:hover {
+        transform: none;
+    }
+
+    .season-card:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
 }
 
 .season-image {
