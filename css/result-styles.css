@@ -1,0 +1,93 @@
+/* 결과 페이지 아트 프레임 스타일 (첫 페이지와 동일) */
+.result-art-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-brown);
+    text-align: center;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    position: relative;
+}
+
+.result-art-frame .paint-brush {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(45deg, #8B4513 0%, #D2691E 50%, #CD853F 100%);
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(45deg);
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.2),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.3);
+    animation: paint-sway 4s ease-in-out infinite;
+    z-index: 20;
+}
+
+.result-art-frame .paint-brush::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 15px;
+    background: linear-gradient(to bottom, #4A4A4A 0%, #2A2A2A 100%);
+    border-radius: 2px;
+}
+
+.result-art-frame .paint-brush::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    background: linear-gradient(45deg, #FF6B6B 0%, #4ECDC4 50%, #45B7D1 100%);
+    border-radius: 50%;
+    box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+/* 해석 설명 박스 */
+.result-description-frame {
+    width: 450px;
+    max-width: 95vw;
+    background: #f8f8f8;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 10;
+}
+
+.result-description-content {
+    text-align: center;
+}
+
+.result-description-frame .complete-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--primary-brown);
+    margin-bottom: 1rem;
+}
+
+.result-description-frame .complete-description {
+    font-size: 0.95rem;
+    color: #333333;
+    line-height: 1.7;
+    margin-bottom: 0;
+    word-break: keep-all;
+    word-wrap: break-word;
+    text-align: left;
+    padding: 0 8px;
+    width: calc(100% - 16px);
+    white-space: pre-line;
+}

@@ -7,10 +7,10 @@
 }
 
 :root {
-    --primary-brown: #2c1810;
+    --primary-brown: #1a0f08;
     --warm-beige: #f5f1eb;
-    --gold-accent: #d4af37;
-    --soft-gray: #8a8a8a;
+    --gold-accent: #ffffff;
+    --soft-gray: #222222;
     --canvas-white: #fefefe;
     --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.15);
     --shadow-light: 0 5px 20px rgba(0, 0, 0, 0.1);
@@ -501,41 +501,92 @@ body {
 /* 완료 섹션 */
 .complete-section {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding: 2rem 1rem;
-    background: var(--warm-beige);
+    padding: 2rem;
+    background: #ffffff;
+    position: relative;
+    overflow: hidden;
 }
 
-.result-frame {
-    background: var(--canvas-white);
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-    border: 3px solid #8B4513;
-    max-width: 450px;
-    width: 100%;
+.complete-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: none;
+    animation: watercolor-float 25s ease-in-out infinite;
+}
+
+.result-art-frame {
+    width: 450px;
+    max-width: 95vw;
+    background: #ffffff;
+    border: 20px solid #E6D7C3;
+    border-radius: 2px;
+    box-shadow:
+        inset 2px 2px 4px rgba(255, 255, 255, 0.8),
+        inset -2px -2px 4px rgba(0, 0, 0, 0.1),
+        0 15px 40px rgba(0, 0, 0, 0.15);
+    position: relative;
+    z-index: 15;
     animation: slideInUp 0.8s ease-out;
 }
 
-.result-canvas {
-    position: relative;
-    background: linear-gradient(135deg, #f8f5f1 0%, #ede7e0 100%);
-    padding: 30px;
+.result-art-frame::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    background: #ffffff;
+    border-radius: 8px;
+    z-index: -1;
 }
 
-.result-image {
+.result-art-frame::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border: none;
+    border-radius: 1px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.result-art-frame .result-canvas {
     width: 100%;
-    height: 280px;
-    border-radius: 12px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 20px;
+    z-index: 15;
+    background: #ffffff;
+}
+
+.result-art-frame .result-image {
+    width: min(350px, calc(100vw - 100px));
+    height: min(350px, calc(100vw - 100px));
+    border-radius: 8px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    margin-bottom: 20px;
-    border: 2px solid rgba(139, 69, 19, 0.2);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    background-color: #ddd;
+    margin: 0;
+    border: none;
+    position: relative;
 }
 
 .result-image:hover {
@@ -546,6 +597,7 @@ body {
 .result-content {
     text-align: center;
 }
+
 
 .complete-emoji {
     font-size: 2.5rem;
@@ -572,91 +624,49 @@ body {
 
 .complete-description {
     font-size: 0.95rem;
-    color: var(--soft-gray);
+    color: #333333;
     line-height: 1.7;
     margin-bottom: 0;
     word-break: keep-all;
     word-wrap: break-word;
-    text-align: center;
-    padding: 0 10px;
+    text-align: left;
+    padding: 0 8px;
+    width: calc(100% - 16px);
+    white-space: pre-line;
 }
 
 .result-actions {
     display: flex;
-    gap: 8px;
-    padding: 20px 30px;
-    background: var(--canvas-white);
-    border-top: 1px solid rgba(139, 69, 19, 0.1);
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 12px;
+    padding: 1rem 1.5rem;
+    background: transparent;
+    align-items: center;
+    margin-top: 2rem;
 }
 
 .retry-btn, .save-btn, .share-btn {
-    flex: 1;
-    padding: 12px 14px;
-    border-radius: 12px;
-    font-size: 0.9rem;
+    background: linear-gradient(135deg, #E6D7C3, #D4C4A8);
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    font-size: 0.95rem;
     font-weight: 600;
+    border-radius: 20px;
     cursor: pointer;
     transition: all 0.3s ease;
+    box-shadow: none;
     font-family: 'Noto Sans KR', sans-serif;
-    border: 2px solid transparent;
-    min-width: 100px;
+    letter-spacing: 0.5px;
+    position: relative;
+    z-index: 5;
+    min-width: 160px;
 }
 
-.retry-btn {
-    background: transparent;
-    color: var(--primary-brown);
-    border-color: var(--primary-brown);
-}
-
-.retry-btn:hover {
-    background: var(--primary-brown);
-    color: white;
+.retry-btn:hover, .save-btn:hover, .share-btn:hover {
     transform: translateY(-2px);
-}
-
-.save-btn {
-    background: transparent;
-    color: var(--primary-brown);
-    border-color: var(--primary-brown);
-}
-
-.save-btn:hover {
-    background: var(--primary-brown);
-    color: white;
-    transform: translateY(-2px);
-}
-
-.share-btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border-color: #667eea;
-}
-
-.share-btn:hover {
-    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
-    border-color: #5a6fd8;
-    transform: translateY(-2px);
-}
-    border: 2px solid var(--primary-brown);
-    color: var(--primary-brown);
-}
-
-.retry-btn:hover {
-    background: var(--primary-brown);
-    color: var(--canvas-white);
-}
-
-.share-btn {
-    background: linear-gradient(135deg, var(--gold-accent), #e6c654);
-    border: none;
-    color: var(--primary-brown);
-    box-shadow: var(--shadow-light);
-}
-
-.share-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-soft);
+    box-shadow: none;
+    background: linear-gradient(135deg, #D4C4A8, #E6D7C3);
 }
 
 /* Q3 - 나다운 순간 선택 */

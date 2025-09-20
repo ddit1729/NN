@@ -6,6 +6,7 @@
     <meta name="description" content="나를 그리는 한 장의 그림 - 예술적 심리테스트">
     <title>나를 그리는 한 장의 그림</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/result-styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -268,19 +269,23 @@
 
         <!-- 완료 메시지 -->
         <section class="complete-section hidden" id="completeSection">
-            <div class="result-frame">
+            <div class="result-art-frame">
                 <div class="result-canvas">
                     <div class="result-image" id="resultImage"></div>
-                    <div class="result-content">
-                        <h2 class="complete-title" id="resultSubtitle">🎨 당신의 내면을 담은 한 폭의 그림</h2>
-                        <p class="complete-description">당신이 선택한 5가지 답변이 하나의 아름다운 작품으로 탄생했습니다.</p>
-                    </div>
+                    <div class="paint-brush"></div>
                 </div>
-                <div class="result-actions">
-                    <button class="retry-btn" id="retryBtn">다시 그리기</button>
-                    <button class="save-btn" id="saveBtn">결과 저장하기</button>
-                    <button class="share-btn" id="shareBtn">결과 공유하기</button>
+            </div>
+
+            <div class="result-description-frame">
+                <div class="result-description-content">
+                    <h2 class="complete-title" id="resultSubtitle">당신만의 특별한 그림이 완성되었습니다</h2>
+                    <p class="complete-description">선택한 순간들이 모여 하나의 아름다운 작품이 되었습니다.</p>
                 </div>
+            </div>
+            <div class="result-actions">
+                <button class="retry-btn" id="retryBtn">다시 그리기</button>
+                <button class="save-btn" id="saveBtn">결과 저장하기</button>
+                <button class="share-btn" id="shareBtn">결과 공유하기</button>
             </div>
         </section>
     </div>
