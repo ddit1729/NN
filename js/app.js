@@ -1109,15 +1109,35 @@ function highlightKeywords(text) {
     return result;
 }
 
+function formatTextBySentences(text) {
+    // 특별한 구문을 먼저 처리
+    let processedText = text.replace(/이 그림을 그려낸 당신은/g, '이 그림을 그려낸 당신은\n');
+    
+    // 마침표를 기준으로 문장 분할하되, 숫자 뒤의 마침표는 제외
+    const sentences = processedText.split(/\.(?!\d)/).filter(sentence => sentence.trim().length > 0);
+    
+    // 각 문장을 줄바꿈으로 연결 (마지막 문장 제외하고 마침표 추가)
+    const formattedSentences = sentences.map((sentence, index) => {
+        const trimmed = sentence.trim();
+        if (trimmed && index < sentences.length - 1) {
+            return trimmed + '.';
+        }
+        return trimmed;
+    }).filter(sentence => sentence.length > 0);
+    
+    return formattedSentences.join('\n\n.');
+}
+
 function applyStructuredFormat(descriptionElement) {
     const rawText = descriptionElement.textContent || descriptionElement.innerText;
+    const formattedText = formatTextBySentences(rawText);
     
     // 타이틀을 박스 밖으로 분리
     const formattedHTML = `
         <h2 class="external-title">🎨당신의 그림이 완성되었습니다</h2>
         <div class="result-section">
             <div class="section-content">
-                <p>${highlightKeywords(rawText)}</p>
+                <p>${formattedText}</p>
             </div>
         </div>
     `;
