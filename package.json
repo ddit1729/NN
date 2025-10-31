@@ -1,0 +1,29 @@
+{
+  "name": "nn-psychological-test",
+  "version": "1.0.0",
+  "description": "나를 그리는 한 장의 그림 - 예술적 심리테스트",
+  "main": "index.html",
+  "type": "module",
+  "scripts": {
+    "dev": "npx serve -p 3000",
+    "start": "npx serve -p 3000",
+    "preview": "npx serve -p 4173",
+    "lint": "echo \"No linting configured\"",
+    "test": "echo \"No tests configured\""
+  },
+  "keywords": [
+    "psychological-test",
+    "art",
+    "personality",
+    "korean",
+    "web-app"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

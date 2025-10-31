@@ -6,7 +6,8 @@
       "Bash(python:*)",
       "Bash(ipconfig)",
       "Bash(findstr:*)",
-      "Bash(dir C:UserscindyDesktopswnnimages)"
+      "Bash(dir C:UserscindyDesktopswnnimages)",
+      "Read(//Users/mingyuki/Desktop/개발 환경/nn/NN/**)"
     ],
     "deny": [],
     "ask": []

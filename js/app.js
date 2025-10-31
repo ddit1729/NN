@@ -624,6 +624,8 @@ function updateFinalResult(season, space, moment, music, value) {
     // 제목과 설명 설정 (제목은 HTML에서 고정, 설명만 동적으로 변경)
     if (completeDescriptionElement) {
         completeDescriptionElement.textContent = interpretation.description;
+        // 구조화된 포맷 적용
+        applyStructuredFormat(completeDescriptionElement);
     }
     
     // 콘솔에서 결과 확인 (가중치 정보 포함)
@@ -1049,3 +1051,76 @@ function showToast(message) {
 
 // 터치 이벤트 최적화 (모바일)
 document.addEventListener('touchstart', function() {}, { passive: true });
+
+// 결과 텍스트 구조화 함수들
+function formatResultText(rawText) {
+    // 문장 단위로 분리 (줄바꿈과 마침표 기준)
+    const sentences = rawText.split(/[.\n]/).filter(s => s.trim().length > 0);
+    
+    const sections = [];
+    let currentSection = { title: "", content: [] };
+    
+    sentences.forEach(sentence => {
+        const trimmed = sentence.trim();
+        if (trimmed.length === 0) return;
+        
+        // 키워드 기반으로 섹션 분리
+        if (containsKeywords(trimmed, ['성향', '특징', '당신은', '스타일'])) {
+            if (currentSection.content.length > 0) sections.push(currentSection);
+            currentSection = { title: "🎨당신의 그림이 완성되었습니다", content: [trimmed] };
+        } else if (containsKeywords(trimmed, ['추천', '어울리', '좋아', '제안'])) {
+            if (currentSection.title !== "💡 추천사항") {
+                if (currentSection.content.length > 0) sections.push(currentSection);
+                currentSection = { title: "💡 추천사항", content: [trimmed] };
+            } else {
+                currentSection.content.push(trimmed);
+            }
+        } else if (containsKeywords(trimmed, ['감정', '마음', '느낌', '기분'])) {
+            if (currentSection.title !== "💭 감정 특성") {
+                if (currentSection.content.length > 0) sections.push(currentSection);
+                currentSection = { title: "💭 감정 특성", content: [trimmed] };
+            } else {
+                currentSection.content.push(trimmed);
+            }
+        } else {
+            if (currentSection.title === "") {
+                currentSection.title = "✨ 전체적인 특징";
+            }
+            currentSection.content.push(trimmed);
+        }
+    });
+    
+    if (currentSection.content.length > 0) sections.push(currentSection);
+    return sections;
+}
+
+function containsKeywords(text, keywords) {
+    return keywords.some(keyword => text.includes(keyword));
+}
+
+function highlightKeywords(text) {
+    const keywords = ['창의적', '감성적', '논리적', '활동적', '차분한', '열정적', 
+                     '따뜻한', '깊이', '안정', '자유로운', '독창적', '섬세한'];
+    let result = text;
+    keywords.forEach(keyword => {
+        const regex = new RegExp(keyword, 'g');
+        result = result.replace(regex, `<span class="highlight">${keyword}</span>`);
+    });
+    return result;
+}
+
+function applyStructuredFormat(descriptionElement) {
+    const rawText = descriptionElement.textContent || descriptionElement.innerText;
+    
+    // 타이틀을 박스 밖으로 분리
+    const formattedHTML = `
+        <h2 class="external-title">🎨당신의 그림이 완성되었습니다</h2>
+        <div class="result-section">
+            <div class="section-content">
+                <p>${highlightKeywords(rawText)}</p>
+            </div>
+        </div>
+    `;
+    
+    descriptionElement.innerHTML = formattedHTML;
+}

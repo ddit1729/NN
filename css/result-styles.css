@@ -53,16 +53,16 @@
     box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.5);
 }
 
-/* 해석 설명 박스 */
+/* 해석 설명 박스 - 숨김 처리 */
 .result-description-frame {
-    width: 450px;
-    max-width: 95vw;
-    background: #f8f8f8;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
+    width: min(330px, 80vw);
+    max-width: 330px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
     margin-top: 2rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: none;
     position: relative;
     z-index: 10;
 }
@@ -91,4 +91,42 @@
     padding: 0 8px;
     width: calc(100% - 16px);
     white-space: pre-line;
+}
+
+/* 외부 타이틀 스타일 */
+.external-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #8B7355;
+    margin-bottom: 0.8rem;
+    text-align: left;
+    letter-spacing: -0.02em;
+}
+
+/* 구조화된 결과 텍스트 스타일 - 메인 박스로 사용 */
+.result-section {
+    background: #f8f8f8;
+    padding: 0.4rem 1rem;
+    margin-bottom: 0;
+    border-radius: 10px;
+    border-left: 4px solid #8B7355;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.section-content p {
+    margin: 0;
+    line-height: 1.7;
+    font-size: 0.95rem;
+    color: #444;
+}
+
+
+.highlight {
+    background: linear-gradient(120deg, #fff3cd 0%, #fff3cd 100%);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+    color: #8B7355;
 }

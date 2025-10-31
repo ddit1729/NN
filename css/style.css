@@ -83,8 +83,9 @@ body {
 }
 
 .art-frame {
-    width: 350px;
-    height: 350px;
+    width: min(330px, 80vw);
+    height: min(330px, 80vw);
+    max-width: 330px;
     background: #ffffff;
     border: 20px solid #E6D7C3;
     border-radius: 2px;
@@ -129,8 +130,8 @@ body {
 }
 
 .art-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
+    font-family: 'Playfair Display', 'Apple SD 궁서', 'HY궁서B', 'Noto Serif KR', 'KaiTi', 'Times New Roman', serif;
+    font-size: 2.6rem;
     font-weight: 700;
     color: #8B7355;
     margin-bottom: 0.5rem;
@@ -138,6 +139,13 @@ body {
     text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     word-break: keep-all;
     text-align: center;
+}
+
+/* PC에서는 기존 크기로 복구 */
+@media (min-width: 768px) {
+    .art-title {
+        font-size: 3rem;
+    }
 }
 
 .art-subtitle {
@@ -166,9 +174,16 @@ body {
 .intro-description p {
     margin: 0 0 1rem 0;
     color: #8B7355;
-    font-size: 1rem;
+    font-size: 0.8rem;
     line-height: 1.6;
     font-weight: 400;
+}
+
+/* PC에서 설명 텍스트는 기존 크기로 복구 */
+@media (min-width: 768px) {
+    .intro-description p {
+        font-size: 1.2rem;
+    }
 }
 
 .intro-description p:last-child {
@@ -536,8 +551,9 @@ body {
 }
 
 .result-art-frame {
-    width: 450px;
-    max-width: 95vw;
+    width: min(330px, 80vw);
+    height: min(330px, 80vw);
+    max-width: 330px;
     background: #ffffff;
     border: 20px solid #E6D7C3;
     border-radius: 2px;
@@ -590,8 +606,11 @@ body {
 }
 
 .result-art-frame .result-image {
-    width: min(350px, calc(100vw - 100px));
-    height: min(350px, calc(100vw - 100px));
+    width: 100%;    /* 부모 컨테이너에 맞춤 */
+    height: 100%;   /* 부모 컨테이너에 맞춤 */
+    max-width: 310px;  /* 패딩 고려 */
+    max-height: 310px; /* 패딩 고려 */
+    z-index: 5;  /* 프레임 안쪽에 위치 */
     border-radius: 8px;
     background-size: cover;
     background-position: center;
@@ -944,7 +963,7 @@ body {
     
     /* 모바일 줄바꿈 최적화 */
     .art-title {
-        font-size: 2rem;
+        font-size: 2.6rem;
         line-height: 1.2;
         word-break: keep-all;
         overflow-wrap: break-word;
@@ -1323,7 +1342,7 @@ body {
 /* 모바일 작은 화면 */
 @media (max-width: 320px) {
     .art-title {
-        font-size: 2rem;
+        font-size: 2.6rem;
         line-height: 1.2;
     }
     
