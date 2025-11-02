@@ -939,7 +939,9 @@ function shareResult() {
     const resultIndex = resultData.index; // 0-15
 
     // 공유 URL 생성
-    const shareUrl = `${window.location.origin}/result/${resultIndex}.html`;
+    // ⚠️ GitHub Pages 배포용 경로: /NN/result/{index}.html
+    // 💡 커스텀 도메인 배포시 변경: /result/{index}.html 로 수정하세요
+    const shareUrl = `${window.location.origin}/NN/result/${resultIndex}.html`;
 
     // Web Share API 지원 확인 (모바일)
     if (navigator.share) {
