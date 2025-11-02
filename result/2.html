@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="나를 그리는 한 장의 그림 - 역동적인 안정감의 추진력">
+    <title>나를 그리는 한 장의 그림 - 역동적인 안정감의 추진력</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/result-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#2c1810">
+
+    <!-- 소셜 미디어 미리보기 -->
+    <meta property="og:title" content="나를 그리는 한 장의 그림 - 역동적인 안정감의 추진력">
+    <meta property="og:description" content="안정감을 바탕으로 끊임없이 성장하고 발전해나가는 에너지 넘치는 사람입니다.">
+    <meta property="og:type" content="website">
+</head>
+<body>
+    <div class="container">
+        <!-- 공유된 결과 섹션 -->
+        <section class="shared-result-section" id="sharedResultSection">
+            <div class="result-art-frame">
+                <div class="result-canvas">
+                    <div class="result-image spring-vivid-image" id="resultImage"></div>
+                    <div class="paint-brush"></div>
+                </div>
+            </div>
+
+            <div class="result-description-frame">
+                <div class="result-description-content">
+                    <h2 class="external-title">🎨 친구가 공유한 그림 결과</h2>
+                    <div class="result-section">
+                        <div class="section-content">
+                            <p>이 그림을 그려낸 당신은
+
+안정감을 바탕으로 끊임없이 성장하고 발전해나가는 에너지 넘치는 사람입니다.
+
+당신의 안정은 정체된 것이 아니라, 마치 봄날 새싹이 돋아나듯 생명력 넘치는 역동적인 안정입니다.
+
+당신은 변화를 두려워하지 않으면서도, 그 변화가 건설적이고 의미 있는 방향으로 나아가도록 이끄는 능력이 뛰어납니다.
+
+새로운 도전을 받아들이되, 기존의 좋은 것들은 지켜내려고 노력합니다.
+
+이런 당신의 모습은 주변 사람들에게 용기와 희망을 줍니다.
+
+당신은 개인의 성장뿐만 아니라 공동체의 발전에도 관심이 많습니다.
+
+사람들을 하나로 모으고, 함께 성장할 수 있는 환경을 만드는 것에 특별한 재능을 가지고 있습니다.
+
+당신의 이런 리더십은 강압적이지 않으면서도 자연스럽게 사람들이 따르고 싶어하는 매력적인 힘을 발휘할 것입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shared-result-actions">
+                <button class="test-btn" id="takeTestBtn">테스트 하기</button>
+                <button class="share-btn" id="shareAgainBtn">공유하기</button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // 메인 테스트로 이동
+        document.getElementById('takeTestBtn').addEventListener('click', function() {
+            window.location.href = '../index.html';
+        });
+
+        // 공유 기능
+        document.getElementById('shareAgainBtn').addEventListener('click', function() {
+            const shareUrl = window.location.href;
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(shareUrl).then(() => {
+                    alert('링크가 복사되었습니다! 친구들과 공유해보세요.');
+                }).catch(() => {
+                    fallbackCopyText(shareUrl);
+                });
+            } else {
+                fallbackCopyText(shareUrl);
+            }
+        });
+
+        // 폴백 복사 기능
+        function fallbackCopyText(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'absolute';
+            textArea.style.left = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                alert('링크가 복사되었습니다! 친구들과 공유해보세요.');
+            } catch (err) {
+                prompt('링크를 복사하세요:', text);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        // 배경 이미지 설정
+        document.addEventListener('DOMContentLoaded', function() {
+            const resultImage = document.getElementById('resultImage');
+            if (resultImage) {
+                resultImage.style.backgroundImage = 'url("../images/green-vivid.jpg")';
+                resultImage.style.backgroundSize = 'cover';
+                resultImage.style.backgroundPosition = 'center';
+                resultImage.style.backgroundRepeat = 'no-repeat';
+            }
+        });
+    </script>
+</body>
+</html>

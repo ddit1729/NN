@@ -934,33 +934,32 @@ function saveResult() {
 
 // 결과 공유하기
 function shareResult() {
-    const resultTitle = document.querySelector('.complete-title').textContent;
-    const resultDescription = document.querySelector('.complete-description').textContent;
-    
-    const shareText = `${resultTitle}\n\n${resultDescription.substring(0, 100)}...\n\n나를 그리는 한 장의 그림 테스트 결과 🎨`;
-    const shareUrl = window.location.href;
-    
+    // 결과 인덱스 계산
+    const resultData = calculateResultMapping(selectedSeason, selectedSpace, selectedMoment, selectedMusic, selectedValue);
+    const resultIndex = resultData.index; // 0-15
+
+    // 공유 URL 생성
+    const shareUrl = `${window.location.origin}/result/${resultIndex}.html`;
+
     // Web Share API 지원 확인 (모바일)
     if (navigator.share) {
         navigator.share({
             title: '나를 그리는 한 장의 그림',
-            text: shareText,
+            text: '나를 그리는 한 장의 그림 테스트 결과 🎨',
             url: shareUrl
         }).catch(err => {
             console.log('공유 취소:', err);
         });
     } else {
         // Web Share API 미지원시 클립보드 복사
-        const shareContent = `${shareText}\n\n${shareUrl}`;
-        
-        if (navigator.clipboard) {
-            navigator.clipboard.writeText(shareContent).then(() => {
-                showToast('결과가 클립보드에 복사되었습니다! 🎨');
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(shareUrl).then(() => {
+                showToast('링크가 복사되었습니다! 친구들과 공유해보세요. 🎨');
             }).catch(() => {
-                fallbackShare(shareContent);
+                fallbackShare(shareUrl);
             });
         } else {
-            fallbackShare(shareContent);
+            fallbackShare(shareUrl);
         }
     }
 }
@@ -978,7 +977,7 @@ function fallbackShare(content) {
     
     try {
         document.execCommand('copy');
-        showToast('결과가 클립보드에 복사되었습니다! 🎨');
+        showToast('링크가 복사되었습니다! 친구들과 공유해보세요. 🎨');
     } catch (err) {
         showToast('수동으로 복사해주세요: Ctrl+C');
         textArea.style.position = 'static';
@@ -1110,8 +1109,11 @@ function highlightKeywords(text) {
 }
 
 function formatTextBySentences(text) {
+    // 전체 텍스트를 먼저 정리 (앞뒤 공백 제거)
+    let cleanedText = text.trim();
+    
     // 특별한 구문을 먼저 처리
-    let processedText = text.replace(/이 그림을 그려낸 당신은/g, '이 그림을 그려낸 당신은\n');
+    let processedText = cleanedText.replace(/이 그림을 그려낸 당신은/g, '이 그림을 그려낸 당신은\n');
     
     // 마침표를 기준으로 문장 분할하되, 숫자 뒤의 마침표는 제외
     const sentences = processedText.split(/\.(?!\d)/).filter(sentence => sentence.trim().length > 0);
@@ -1125,22 +1127,19 @@ function formatTextBySentences(text) {
         return trimmed;
     }).filter(sentence => sentence.length > 0);
     
-    return formattedSentences.join('\n\n.');
+    // 시작과 끝 여백 제거를 위해 깔끔하게 연결
+    const result = formattedSentences.join('\n\n');
+    
+    // 최종 정리: 앞뒤 불필요한 줄바꿈 제거
+    return result.trim();
 }
 
 function applyStructuredFormat(descriptionElement) {
     const rawText = descriptionElement.textContent || descriptionElement.innerText;
     const formattedText = formatTextBySentences(rawText);
     
-    // 타이틀을 박스 밖으로 분리
-    const formattedHTML = `
-        <h2 class="external-title">🎨당신의 그림이 완성되었습니다</h2>
-        <div class="result-section">
-            <div class="section-content">
-                <p>${formattedText}</p>
-            </div>
-        </div>
-    `;
+    // 타이틀을 박스 밖으로 분리 (들여쓰기 제거)
+    const formattedHTML = `<h2 class="external-title">🎨당신의 그림이 완성되었습니다</h2><div class="result-section"><div class="section-content"><p>${formattedText}</p></div></div>`;
     
     descriptionElement.innerHTML = formattedHTML;
 }

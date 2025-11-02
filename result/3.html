@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="나를 그리는 한 장의 그림 - 무한한 안정감의 수호자">
+    <title>나를 그리는 한 장의 그림 - 무한한 안정감의 수호자</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/result-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#2c1810">
+
+    <!-- 소셜 미디어 미리보기 -->
+    <meta property="og:title" content="나를 그리는 한 장의 그림 - 무한한 안정감의 수호자">
+    <meta property="og:description" content="마치 수백 년을 견뎌온 거대한 나무처럼, 주변의 모든 것들을 품어주는 따뜻하고 깊은 안정감을 가진 사람입니다.">
+    <meta property="og:type" content="website">
+</head>
+<body>
+    <div class="container">
+        <!-- 공유된 결과 섹션 -->
+        <section class="shared-result-section" id="sharedResultSection">
+            <div class="result-art-frame">
+                <div class="result-canvas">
+                    <div class="result-image spring-dark-image" id="resultImage"></div>
+                    <div class="paint-brush"></div>
+                </div>
+            </div>
+
+            <div class="result-description-frame">
+                <div class="result-description-content">
+                    <h2 class="external-title">🎨 친구가 공유한 그림 결과</h2>
+                    <div class="result-section">
+                        <div class="section-content">
+                            <p>이 그림을 그려낸 당신은
+
+마치 수백 년을 견뎌온 거대한 나무처럼, 주변의 모든 것들을 품어주는 따뜻하고 깊은 안정감을 가진 사람입니다.
+
+당신에게 안정이란 단순히 개인적인 평안함을 넘어서, 다른 사람들에게도 안식처가 되어주는 소중한 선물입니다.
+
+당신은 어떤 어려움이 와도 흔들리지 않는 강인함을 가지고 있으며, 동시에 상처받은 사람들을 치유해주는 따뜻함도 함께 가지고 있습니다.
+
+사람들은 당신과 함께 있으면 마치 깊은 숲 속에서 쉬는 것 같은 평온함을 느낍니다.
+
+당신은 급진적인 변화보다는 점진적이고 지속가능한 발전을 추구하며, 모든 사람이 조화롭게 공존할 수 있는 환경을 만들기 위해 노력합니다.
+
+때로는 당신의 이런 신중함을 답답해하는 사람들도 있을 수 있지만, 시간이 지나면 당신의 선택이 얼마나 지혜로웠는지 깨닫게 될 것입니다.
+
+당신은 이 세상에 진정한 안정과 평화를 가져다주는 귀한 존재입니다.
+
+당신의 존재 자체가 많은 사람들에게 희망이 되고 있다는 것을 기억해주세요.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shared-result-actions">
+                <button class="test-btn" id="takeTestBtn">테스트 하기</button>
+                <button class="share-btn" id="shareAgainBtn">공유하기</button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // 메인 테스트로 이동
+        document.getElementById('takeTestBtn').addEventListener('click', function() {
+            window.location.href = '../index.html';
+        });
+
+        // 공유 기능
+        document.getElementById('shareAgainBtn').addEventListener('click', function() {
+            const shareUrl = window.location.href;
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(shareUrl).then(() => {
+                    alert('링크가 복사되었습니다! 친구들과 공유해보세요.');
+                }).catch(() => {
+                    fallbackCopyText(shareUrl);
+                });
+            } else {
+                fallbackCopyText(shareUrl);
+            }
+        });
+
+        // 폴백 복사 기능
+        function fallbackCopyText(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'absolute';
+            textArea.style.left = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                alert('링크가 복사되었습니다! 친구들과 공유해보세요.');
+            } catch (err) {
+                prompt('링크를 복사하세요:', text);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        // 배경 이미지 설정
+        document.addEventListener('DOMContentLoaded', function() {
+            const resultImage = document.getElementById('resultImage');
+            if (resultImage) {
+                resultImage.style.backgroundImage = 'url("../images/green-dark.jpg")';
+                resultImage.style.backgroundSize = 'cover';
+                resultImage.style.backgroundPosition = 'center';
+                resultImage.style.backgroundRepeat = 'no-repeat';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="나를 그리는 한 장의 그림 - 내면의 고요한 안정감">
+    <title>나를 그리는 한 장의 그림 - 내면의 고요한 안정감</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/result-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#2c1810">
+    
+    <!-- 소셜 미디어 미리보기 -->
+    <meta property="og:title" content="나를 그리는 한 장의 그림 - 내면의 고요한 안정감">
+    <meta property="og:description" content="마음 깊은 곳에 누구도 흔들 수 없는 고요하고 단단한 뿌리를 내린 사람입니다.">
+    <meta property="og:type" content="website">
+</head>
+<body>
+    <div class="container">
+        <!-- 공유된 결과 섹션 -->
+        <section class="shared-result-section" id="sharedResultSection">
+            <div class="result-art-frame">
+                <div class="result-canvas">
+                    <div class="result-image spring-bright-image" id="resultImage"></div>
+                    <div class="paint-brush"></div>
+                </div>
+            </div>
+
+            <div class="result-description-frame">
+                <div class="result-description-content">
+                    <h2 class="external-title">🎨 친구가 공유한 그림 결과</h2>
+                    <div class="result-section">
+                        <div class="section-content">
+                            <p>이 그림을 그려낸 당신은
+
+마음 깊은 곳에 누구도 흔들 수 없는 고요하고 단단한 뿌리를 내린 사람입니다.
+
+당신의 안정감은 외부의 화려함이나 시끄러운 것들에서 오는 것이 아니라, 자신의 내면에서 우러나오는 진정한 평온함입니다.
+
+당신은 급작스러운 변화보다는 천천히, 하지만 꾸준히 성장해나가는 것을 선호합니다.
+
+마치 깊은 숲 속의 나무들처럼 시간이 지날수록 더욱 단단해지고 깊어지는 존재입니다.
+
+다른 사람들이 조급해할 때도 당신은 자신만의 속도를 유지하며 묵묵히 나아갑니다.
+
+당신에게 가장 소중한 것은 마음의 평화와 내적 조화입니다.
+
+혼자만의 시간을 통해 자신을 돌아보고, 진정으로 의미 있는 것들에 집중하는 능력이 뛰어납니다.
+
+때로는 세상이 너무 빠르게 돌아간다고 느낄 수도 있지만, 당신의 이런 차분함과 깊이가 주변 사람들에게는 큰 위로가 될 것입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="shared-result-actions">
+                <button class="test-btn" id="takeTestBtn">테스트 하기</button>
+                <button class="share-btn" id="shareAgainBtn">공유하기</button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // 메인 테스트로 이동
+        document.getElementById('takeTestBtn').addEventListener('click', function() {
+            window.location.href = '../index.html';
+        });
+
+        // 공유 기능
+        document.getElementById('shareAgainBtn').addEventListener('click', function() {
+            const shareUrl = window.location.href;
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(shareUrl).then(() => {
+                    alert('링크가 복사되었습니다! 친구들과 공유해보세요.');
+                }).catch(() => {
+                    fallbackCopyText(shareUrl);
+                });
+            } else {
+                fallbackCopyText(shareUrl);
+            }
+        });
+
+        // 폴백 복사 기능
+        function fallbackCopyText(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'absolute';
+            textArea.style.left = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                alert('링크가 복사되었습니다! 친구들과 공유해보세요.');
+            } catch (err) {
+                prompt('링크를 복사하세요:', text);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        // 배경 이미지 설정
+        document.addEventListener('DOMContentLoaded', function() {
+            const resultImage = document.getElementById('resultImage');
+            if (resultImage) {
+                // spring-bright 이미지 사용
+                resultImage.style.backgroundImage = 'url("../images/green-bright.jpg")';
+                resultImage.style.backgroundSize = 'cover';
+                resultImage.style.backgroundPosition = 'center';
+                resultImage.style.backgroundRepeat = 'no-repeat';
+            }
+        });
+    </script>
+</body>
+</html>

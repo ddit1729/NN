@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="나를 그리는 한 장의 그림 - 적극적인 관계 주도형">
+    <title>나를 그리는 한 장의 그림 - 적극적인 관계 주도형</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/result-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#2c1810">
+
+    <!-- 소셜 미디어 미리보기 -->
+    <meta property="og:title" content="나를 그리는 한 장의 그림 - 적극적인 관계 주도형">
+    <meta property="og:description" content="사람들과의 만남에서 에너지를 얻고, 그 에너지를 다시 주변 사람들에게 나누어주는 따뜻한 태양 같은 존재입니다.">
+    <meta property="og:type" content="website">
+</head>
+<body>
+    <div class="container">
+        <!-- 공유된 결과 섹션 -->
+        <section class="shared-result-section" id="sharedResultSection">
+            <div class="result-art-frame">
+                <div class="result-canvas">
+                    <div class="result-image autumn-vivid-image" id="resultImage"></div>
+                    <div class="paint-brush"></div>
+                </div>
+            </div>
+
+            <div class="result-description-frame">
+                <div class="result-description-content">
+                    <h2 class="external-title">🎨 친구가 공유한 그림 결과</h2>
+                    <div class="result-section">
+                        <div class="section-content">
+                            <p>이 그림을 그려낸 당신은
+
+사람들과의 만남에서 에너지를 얻고, 그 에너지를 다시 주변 사람들에게 나누어주는 따뜻한 태양 같은 존재입니다.
+
+당신은 관계에서 수동적으로 기다리기보다는 먼저 다가가고, 먼저 관심을 표현하며, 먼저 손을 내미는 사람입니다.
+
+당신의 밝고 긍정적인 에너지는 주변 사람들에게 활력을 주고, 때로는 소극적이던 사람들도 당신 덕분에 마음을 열게 됩니다.
+
+새로운 만남을 두려워하지 않고, 오히려 설렘으로 받아들이는 당신의 모습은 많은 사람들에게 영감을 줍니다.
+
+당신은 그룹에서 자연스럽게 분위기 메이커 역할을 하며, 사람들 사이의 관계를 연결해주는 다리 같은 존재입니다.
+
+때로는 너무 많은 관계에 에너지를 쏟아 지칠 수도 있지만, 사람들과의 소중한 추억들이 당신에게는 가장 큰 보물이 될 것입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shared-result-actions">
+                <button class="test-btn" id="takeTestBtn">테스트 하기</button>
+                <button class="share-btn" id="shareAgainBtn">공유하기</button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // 메인 테스트로 이동
+        document.getElementById('takeTestBtn').addEventListener('click', function() {
+            window.location.href = '../index.html';
+        });
+
+        // 공유 기능
+        document.getElementById('shareAgainBtn').addEventListener('click', function() {
+            const shareUrl = window.location.href;
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(shareUrl).then(() => {
+                    alert('링크가 복사되었습니다! 친구들과 공유해보세요.');
+                }).catch(() => {
+                    fallbackCopyText(shareUrl);
+                });
+            } else {
+                fallbackCopyText(shareUrl);
+            }
+        });
+
+        // 폴백 복사 기능
+        function fallbackCopyText(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'absolute';
+            textArea.style.left = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                alert('링크가 복사되었습니다! 친구들과 공유해보세요.');
+            } catch (err) {
+                prompt('링크를 복사하세요:', text);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        // 배경 이미지 설정
+        document.addEventListener('DOMContentLoaded', function() {
+            const resultImage = document.getElementById('resultImage');
+            if (resultImage) {
+                resultImage.style.backgroundImage = 'url("../images/yellow-vivid.jpg")';
+                resultImage.style.backgroundSize = 'cover';
+                resultImage.style.backgroundPosition = 'center';
+                resultImage.style.backgroundRepeat = 'no-repeat';
+            }
+        });
+    </script>
+</body>
+</html>

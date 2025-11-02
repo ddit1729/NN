@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="나를 그리는 한 장의 그림 - 적응력 있는 독립성">
+    <title>나를 그리는 한 장의 그림 - 적응력 있는 독립성</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/result-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#2c1810">
+
+    <!-- 소셜 미디어 미리보기 -->
+    <meta property="og:title" content="나를 그리는 한 장의 그림 - 적응력 있는 독립성">
+    <meta property="og:description" content="자유로움과 책임감 사이에서 아름다운 균형을 찾은 현명한 사람입니다.">
+    <meta property="og:type" content="website">
+</head>
+<body>
+    <div class="container">
+        <!-- 공유된 결과 섹션 -->
+        <section class="shared-result-section" id="sharedResultSection">
+            <div class="result-art-frame">
+                <div class="result-canvas">
+                    <div class="result-image winter-soft-image" id="resultImage"></div>
+                    <div class="paint-brush"></div>
+                </div>
+            </div>
+
+            <div class="result-description-frame">
+                <div class="result-description-content">
+                    <h2 class="external-title">🎨 친구가 공유한 그림 결과</h2>
+                    <div class="result-section">
+                        <div class="section-content">
+                            <p>이 그림을 그려낸 당신은
+
+자유로움과 책임감 사이에서 아름다운 균형을 찾은 현명한 사람입니다.
+
+당신은 자유를 추구하지만 동시에 주변 상황과 사람들을 배려할 줄도 아는, 성숙한 자유인입니다.
+
+당신의 자유는 마치 잔잔한 파도처럼 유연하고 적응력이 뛰어납니다.
+
+때로는 규칙과 틀 안에서도 자신만의 방식을 찾아내고, 때로는 과감하게 새로운 길을 개척하기도 합니다.
+
+중요한 것은 어떤 상황에서든 자신다움을 잃지 않으면서도 조화를 이룰 줄 안다는 점입니다.
+
+당신은 계획을 세우는 것도 좋아하지만, 그 계획에 너무 얽매이지는 않습니다.
+
+상황에 따라 유연하게 변화할 수 있는 여유로움이 당신의 큰 매력입니다.
+
+이런 당신의 모습은 주변 사람들에게도 좋은 영향을 주며, 함께 있으면 편안함을 느끼게 해줍니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shared-result-actions">
+                <button class="test-btn" id="takeTestBtn">테스트 하기</button>
+                <button class="share-btn" id="shareAgainBtn">공유하기</button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // 메인 테스트로 이동
+        document.getElementById('takeTestBtn').addEventListener('click', function() {
+            window.location.href = '../index.html';
+        });
+
+        // 공유 기능
+        document.getElementById('shareAgainBtn').addEventListener('click', function() {
+            const shareUrl = window.location.href;
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(shareUrl).then(() => {
+                    alert('링크가 복사되었습니다! 친구들과 공유해보세요.');
+                }).catch(() => {
+                    fallbackCopyText(shareUrl);
+                });
+            } else {
+                fallbackCopyText(shareUrl);
+            }
+        });
+
+        // 폴백 복사 기능
+        function fallbackCopyText(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'absolute';
+            textArea.style.left = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                alert('링크가 복사되었습니다! 친구들과 공유해보세요.');
+            } catch (err) {
+                prompt('링크를 복사하세요:', text);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        // 배경 이미지 설정
+        document.addEventListener('DOMContentLoaded', function() {
+            const resultImage = document.getElementById('resultImage');
+            if (resultImage) {
+                resultImage.style.backgroundImage = 'url("../images/blue-soft.jpg")';
+                resultImage.style.backgroundSize = 'cover';
+                resultImage.style.backgroundPosition = 'center';
+                resultImage.style.backgroundRepeat = 'no-repeat';
+            }
+        });
+    </script>
+</body>
+</html>
